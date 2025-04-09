@@ -1,0 +1,357 @@
+/* style.css */
+/* Combined styles for layout, theme, slides, toggles, and effects */
+
+/* --- Basic Reset --- */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* --- Theme Variables --- */
+:root {
+	/* Light Mode Colors */
+	--bg-color: #f8f8f8;
+	--text-color: #333333; /* Dark text for light mode */
+	--nav-bg: #e0e0e0;
+	--nav-icon-color: #555555;
+	--link-hover-bg: #cccccc;
+	--cta-bg: var(--nav-icon-color);
+	--cta-text: var(--nav-bg); /* Light text for dark button in light mode */
+	--slide-button-bg: rgba(0, 0, 0, 0.3);
+	--slide-button-hover-bg: rgba(0, 0, 0, 0.6);
+	--slide-button-text: white;
+
+    /* --- Hero Gradient Colors (Light Mode - Slightly Brighter/Different Palette) --- */
+    --hero-grad-1: hsl(280, 48%, 74%); /* Muted Violet */
+    --hero-grad-2: hsl(240, 47%, 79%); /* Muted Blue */
+    --hero-grad-3: hsl(180, 40%, 78%); /* Muted Cyan */
+    --hero-grad-4: hsl(120, 47%, 79%); /* Muted Green */
+    --hero-grad-5: hsl(60, 46%, 84%);  /* Muted Yellow */
+    --hero-grad-6: hsl(20, 53%, 84%);  /* Muted Orange */
+
+	--hero-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Shadow for light mode */
+	--hero-cta-bg: hsla(
+		0,
+		0%,
+		20%,
+		0.7
+	); /* Darker semi-transparent btn for light mode */
+	--hero-cta-text: white; /* Light text on btn */
+	--hero-cta-hover-bg: hsla(0, 0%, 10%, 0.8);
+}
+
+html.dark {
+	/* Dark Mode Colors */
+	--bg-color: #1a1a1a;
+	--text-color: #e0e0e0; /* Light text for dark mode */
+	--nav-bg: #2c2c2c;
+	--nav-icon-color: #b0b0b0;
+	--link-hover-bg: #444444;
+	--cta-bg: var(--nav-icon-color);
+	--cta-text: var(--nav-bg); /* Dark text for light button in dark mode */
+	--slide-button-bg: rgba(255, 255, 255, 0.2);
+	--slide-button-hover-bg: rgba(255, 255, 255, 0.4);
+	--slide-button-text: white;
+
+    /* --- Hero Gradient Colors (Dark Mode - Original Dark Rainbow) --- */
+    --hero-grad-1: hsl(0, 64%, 6%);   /* Dark Red */
+    --hero-grad-2: hsl(41, 66%, 9%);  /* Dark Orange */
+    --hero-grad-3: hsl(80, 67%, 7%);  /* Dark Yellow-Green */
+    --hero-grad-4: hsl(160, 68%, 6%); /* Dark Teal */
+    --hero-grad-5: hsl(220, 66%, 8%); /* Dark Blue */
+    --hero-grad-6: hsl(280, 68%, 6%); /* Dark Violet */
+
+	--hero-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); /* Shadow for dark mode */
+	--hero-cta-bg: hsla(
+		0,
+		0%,
+		100%,
+		0.75
+	); /* Lighter semi-transparent btn for dark mode */
+	--hero-cta-text: #1a1a1a; /* Dark text on btn */
+	--hero-cta-hover-bg: hsla(0, 0%, 100%, 0.9);
+}
+/* --- End Theme Variables --- */
+
+/* --- Base Styles --- */
+html,
+body {
+	height: 100%;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	background-color: var(--bg-color);
+	color: var(--text-color); /* Default text color applies */
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Navigation Bar (Desktop - Default) --- */
+#icon-nav {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 60px;
+	background-color: var(--nav-bg);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	gap: 15px;
+	z-index: 10;
+	transition: background-color 0.3s ease, width 0.3s ease, height 0.3s ease,
+		top 0.3s ease, right 0.3s ease, left 0.3s ease, bottom 0.3s ease,
+		flex-direction 0s;
+}
+/* Nav Links and Base Button Styles (Shared) */
+#icon-nav a,
+#icon-nav button {
+	color: var(--nav-icon-color);
+	font-size: 24px;
+	text-decoration: none;
+	padding: 8px;
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color 0.2s ease, color 0.3s ease;
+	border: none;
+	background: none;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+}
+#icon-nav a:hover,
+#icon-nav button:hover {
+	background-color: var(--link-hover-bg);
+}
+/* Theme Toggle Button Specifics (Desktop) */
+#theme-toggle {
+	margin-top: auto;
+}
+/* Snow Toggle Button Specifics (Desktop) */
+#snow-toggle {
+	margin-top: 0;
+}
+
+/* --- Hero Section (Desktop - Default) --- */
+#hero {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	transition: padding-top 0.3s ease, padding-right 0.3s ease;
+	padding-right: 75px;
+	padding-left: 15px;
+	padding-top: 0;
+	position: relative;
+	overflow: hidden;
+	/* --- Animated Dark Rainbow Background --- */
+    /* Use CSS variables for gradient colors */
+    background: linear-gradient(135deg,
+        var(--hero-grad-1),
+        var(--hero-grad-2),
+        var(--hero-grad-3),
+        var(--hero-grad-4),
+        var(--hero-grad-5),
+        var(--hero-grad-6),
+        var(--hero-grad-1) /* Repeat first color for loop */
+    );
+	background-size: 500% 500%;
+	animation: waveAnimation 10s ease infinite;
+	/* --- End Animated Background --- */
+}
+
+/* Ensure hero text uses theme text color but adds shadow for readability */
+#hero h2,
+#hero p {
+	color: var(--text-color); /* USE THEME VARIABLE */
+	text-shadow: var(--hero-text-shadow); /* Use theme-dependent shadow */
+	position: relative; /* Ensure text is layered above background */
+	z-index: 2;
+}
+/* Style hero CTA button using theme variables for its specific context */
+#hero .cta-button {
+	background-color: var(--hero-cta-bg);
+	color: var(--hero-cta-text);
+	text-shadow: none;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	position: relative;
+	z-index: 2;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+#hero .cta-button:hover {
+	background-color: var(--hero-cta-hover-bg);
+}
+
+
+/* --- Slides --- */
+.slides-container {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 200px;
+	position: relative;
+	z-index: 1; /* Behind text/buttons */
+}
+.slide {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 20px;
+	width: 100%;
+	max-width: 600px;
+	animation: fadeIn 0.6s ease-in-out;
+}
+
+.slide.active {
+	display: flex;
+}
+
+/* Call to Action Button in Slides */
+.cta-button {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: var(--cta-bg);
+	color: var(--cta-text);
+	text-decoration: none;
+	border-radius: 5px;
+	font-weight: bold;
+	transition: background-color 0.3s ease, color 0.3s ease, opacity 0.2s ease;
+}
+
+.cta-button:hover {
+	opacity: 0.9;
+}
+
+.slide h2 {
+	font-size: 2rem;
+	margin-bottom: 0.8rem;
+	color: var(--text-color);
+	transition: color 0.3s ease;
+}
+
+.slide p {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	margin-bottom: 1.5rem;
+	color: var(--text-color);
+	transition: color 0.3s ease;
+}
+
+
+/* Slide Content styles are handled by the #hero selectors above */
+
+/* --- Slide Navigation Buttons (Prev/Next - Desktop Default) --- */
+#prev-slide,
+#next-slide {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: var(--slide-button-bg);
+	color: var(--slide-button-text);
+	border: none;
+	font-size: 24px;
+	font-weight: bold;
+	padding: 10px 15px;
+	cursor: pointer;
+	border-radius: 5px;
+	z-index: 5; /* Above slides, below nav */
+	transition: background-color 0.3s ease, color 0.3s ease, right 0.3s ease,
+		left 0.3s ease;
+}
+#prev-slide:hover,
+#next-slide:hover {
+	background-color: var(--slide-button-hover-bg);
+}
+#prev-slide {
+	left: 15px;
+}
+#next-slide {
+	right: calc(60px + 15px);
+}
+
+/* --- Snowfall Canvas --- */
+#snowfall {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 1000;
+	/* display initial state set by JS */
+}
+
+/* --- Mobile Styles (screens <= 768px) --- */
+@media (max-width: 768px) {
+	#icon-nav {
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: auto;
+		width: 100%;
+		height: 55px;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		padding-top: 0;
+		padding-bottom: 0;
+		padding-left: 10px;
+		padding-right: 10px;
+		gap: 5px;
+	}
+	#theme-toggle,
+	#snow-toggle {
+		margin-top: 0;
+	}
+	#hero {
+		padding-right: 15px;
+		padding-left: 15px;
+		padding-top: 70px; /* Nav height + gap */
+	}
+	#prev-slide {
+		left: 10px;
+		padding: 8px 12px;
+		font-size: 20px;
+	}
+	#next-slide {
+		right: 10px;
+		padding: 8px 12px;
+		font-size: 20px;
+	}
+	#hero h2 {
+		font-size: 1.8rem;
+	}
+	#hero p {
+		font-size: 1rem;
+	}
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+/* Keyframes for Hero Background Animation */
+@keyframes waveAnimation {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website with Hero Slides, Snowflakes, and Right Nav - by TGM Group</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lodash@4.17.21/lodash.min.js"></script>
+    <script>
+      (function() {
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else if (savedTheme === 'light') {
+             document.documentElement.classList.remove('dark');
+          } else {
+             // Default to dark if nothing set and system isn't dark
+             document.documentElement.classList.add('dark');
+          }
+        } catch (e) { console.error("Error applying initial theme class:", e); }
+      })();
+    </script>
+</head>
+<body>
+
+    <nav id="icon-nav">
+        <a href="#" aria-label="Product Alpha" class="slide-nav-trigger" data-target-slide="slide-alpha">&#x1F4E6;</a> <a href="#" aria-label="Product Beta" class="slide-nav-trigger" data-target-slide="slide-beta">&#x1F9EA;</a> <a href="#" aria-label="Product Gamma" class="slide-nav-trigger" data-target-slide="slide-gamma">&#x1F52C;</a> <a href="#" aria-label="Home">&#x1F3E0;</a> <a href="#" aria-label="About">&#x2139;</a> <a href="#" aria-label="Contact">&#x1F4DE;</a> <button id="theme-toggle" aria-label="Switch theme">
+            </button>
+
+        <button id="snow-toggle" aria-label="Toggle Snowflakes">
+            &#x2744; </button>
+    </nav>
+
+    <main id="hero">
+        <div class="slides-container">
+            <div class="slide active" id="slide-alpha">
+                <h2>Product Alpha</h2>
+                <p>Description for Product Alpha. Highlighting its key features and benefits.</p>
+                <a href="#" class="cta-button">Learn More</a>
+            </div>
+            <div class="slide" id="slide-beta">
+                <h2>Product Beta</h2>
+                <p>Discover Product Beta, designed for efficiency and ease of use.</p>
+                <a href="#" class="cta-button">Explore Beta</a>
+            </div>
+            <div class="slide" id="slide-gamma">
+                <h2>Product Gamma</h2>
+                <p>The latest innovation: Product Gamma offers cutting-edge technology.</p>
+                 <a href="#" class="cta-button">See Gamma</a>
+            </div>
+             </div>
+
+        <button id="prev-slide" aria-label="Previous Slide">&lt;</button>
+        <button id="next-slide" aria-label="Next Slide">&gt;</button>
+    </main>
+
+    <canvas id="snowfall"></canvas>
+
+    <script src="scripts.js" defer></script>
+
+</body>
+</html>
